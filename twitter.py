@@ -50,7 +50,7 @@ def getUserTweets(user):
           returns most recent 200 tweets
           does not include retweets and replies
     """
-    uri = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=%s"
+    uri = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=%s&count=200"
     url = uri%(user)
     results = json.loads(apirequest(url, getToken(), False))
     #pretty = json.dumps(results, sort_keys=True, indent=4)#for testing
