@@ -100,7 +100,7 @@ d3.csv('data.csv', function(err, data) {
         .attr('y', y(to_int(data[hour].tedcruz)))
         .attr('height', height - y(to_int(data[hour].tedcruz)));
 
-});
+    });
 }
 
 d3.select("#hour").on("input", function() {
