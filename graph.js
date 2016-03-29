@@ -1,5 +1,8 @@
 console.log('js file loaded');
 
+// TODO -- tolltip the thing to show exact number of tweets
+// TODO -- load the csv once instead of per interactivity
+
 var margin = {top: 40, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -17,14 +20,6 @@ var xAxis = d3.svg.axis()
 var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left");
-
-    //var tip = d3.tip()
-    //  .attr('class', 'd3-tip')
-    //  .offset([-10, 0])
-    //  .html(function(d) {
-    //    return "<strong>Frequency:</strong> <span style='color:red'>" + d.tweets + "</span>";
-    //  });
-
 
 var to_int = function(d) {
     return parseInt(d, 10);
@@ -64,6 +59,7 @@ d3.csv('data.csv', function(err, data) {
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .text("Tweets");
+
     svg.append('rect')
         .attr('class', 'sanders')
         .attr('fill', 'blue')
