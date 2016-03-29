@@ -63,17 +63,29 @@ def getUserTweets(user):
     tweets = ""
     print "results: " + str(len(results))
     for post in results:
-        tweets += "\n" + post['created_at']
+        tweets += "\n" + post['created_at'].split(' ')[3].split(':')[0]
     return tweets
-print getUserTweets("BernieSanders")
 
 candidates = ["BernieSanders", "realDonaldTrump", "HillaryClinton", "tedcruz", "JohnKasich"]
-s = ""
 f = open("data.csv", "w")
+s = "Time,"
+
+candidate_tweets = {} # b/c python > js
+
 for cand in candidates:
-	text = getUserTweets(cand)
-	for line in text.split("\n"):
-		if len(line) > 2:
-			s += cand + "," + line + "\n"
-print s
+    s += cand + ','
+    candidate_tweets[cand] = [0] * 24
+    text = getUserTweets(cand)
+    for line in text.split("\n"):
+        if len(line) != 0:
+            candidate_tweets[cand][int(line)] += 1
+
+s = s[:-1] + '\n'
+
+for i in range(0, 24):
+    s += str(i) + ','
+    for cand in candidates:
+        s += str(candidate_tweets[cand][i]) + ','
+    s = s[:-1] + '\n'
+
 f.write(s)

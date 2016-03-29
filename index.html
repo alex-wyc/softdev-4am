@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
-  <title> Twitter of Candidates </title>
-<body>
-  <center>
-    <h1> Time of Candidates' tweets </h1>
-  </center>
-  <canvas 
-     id="legend" height = "200" width = "200" style="border: 1px solid">
-  </canvas>
-  <br>
-  <center>
-    <canvas id="lineGraph" height = "600" width="600" style="border: 1px solid"></canvas>
-  </center>
-</body>
-<script src="infograph.js"></script>
+    <head>
+        <title>Twitter of Candidates</title>
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+        <link rel='stylesheet' type='text/css' src='css/style.css'></link>
+    </head>
+    <body>
+        <h1>Time of Candidates' Tweets</h1>
+        <label for="hour" 
+               style="display: inline-block; width: 240px; text-align: right">
+            Time of Day = <span id="hour-value"></span>
+        </label>
+        <input type="range" min="0" max="24" id="hour">
+        <div id='chart'></div>
+        <script src='graph.js'></script>
+    </body>
 </html>
