@@ -1,6 +1,7 @@
 var to_int = function(d) {
     return parseInt(d, 10);
 }
+
 var sandersCon = liquidFillGaugeDefaultSettings();
 sandersCon.circleColor = "#2b31ad";
 sandersCon.textColor = "#a6a9ea";
@@ -84,5 +85,6 @@ var update = function(hour) {
 d3.select("#hour").on("input", function() {
     update(+this.value);
 });
-update(20);
+
+update(17);
 

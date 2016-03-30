@@ -6,14 +6,18 @@
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
         <script src="liquidFillGauge.js"></script>
+        <link rel='stylesheet' type='text/css' href='css/style.css'></link>
     </head>
     <body>
+        <center>
         <h1>Time of Candidates' Tweets</h1>
         <label for="hour" 
                style="display: inline-block; width: 240px; text-align: right">
             Time of Day = <span id="hour-value"></span>
         </label>
-        <input type="range" min="0" max="23" id="hour">
+        <input type="range" min="0" max="23" id="hour" autofocus>
+
+        </center>
 	<div id='chart'>
 	  <svg id="sanders" height="300" width="19%"></svg>
 	  <svg id="clinton" height="300" width="19%"></svg>
@@ -21,6 +25,20 @@
 	  <svg id="trump" height="300" width="19%"></svg>
 	  <svg id="cruz" height="300" width="19%"></svg>
 	</div>
+
+    <hr>
+    <center>
+    <h3>About</h3>
+
+    <p>It is said every election year that "this is the election of the social
+    media." A smart media team is an invaluable asset for any candidate, and a
+    savvy twitter user can reach a lot of voters by the simple act of typing
+    less than 140 characters and clicking a button. However, it is
+    interesting to see <b>when</b> the current political candidates tweet
+    their tweets. This graph is based on the past 200 tweets of each of the
+    candidates, and demonstrates their distribution across the hours of the
+    day.</p>
+    </center>
         <script src='graph.js'></script>
     </body>
 </html>
