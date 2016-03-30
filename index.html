@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <meta charset="UTF-8">
         <title>Twitter of Candidates</title>
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-        <link rel='stylesheet' type='text/css' src='css/style.css'></link>
+        <script src="liquidFillGauge.js"></script>
     </head>
     <body>
         <h1>Time of Candidates' Tweets</h1>
@@ -13,7 +14,13 @@
             Time of Day = <span id="hour-value"></span>
         </label>
         <input type="range" min="0" max="23" id="hour">
-        <div id='chart'></div>
+	<div id='chart'>
+	  <svg id="sanders" height="300" width="19%"></svg>
+	  <svg id="clinton" height="300" width="19%"></svg>
+	  <svg id="kasich" height="300" width="19%"></svg>
+	  <svg id="trump" height="300" width="19%"></svg>
+	  <svg id="cruz" height="300" width="19%"></svg>
+	</div>
         <script src='graph.js'></script>
     </body>
 </html>

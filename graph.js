@@ -1,110 +1,88 @@
-console.log('js file loaded');
-
-// TODO -- tolltip the thing to show exact number of tweets
-// TODO -- load the csv once instead of per interactivity
-
-var margin = {top: 40, right: 20, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
-
-var x = d3.scale.ordinal()
-    .rangeRoundBands([0, width], .1);
-
-var y = d3.scale.linear()
-    .range([height, 0]);
-
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom");
-
-var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left");
-
 var to_int = function(d) {
     return parseInt(d, 10);
 }
+var sandersCon = liquidFillGaugeDefaultSettings();
+sandersCon.circleColor = "#2b31ad";
+sandersCon.textColor = "#a6a9ea";
+sandersCon.waveTextColor = "#b3b5e5";
+sandersCon.waveColor = "#8689ce";
+sandersCon.circleThickness = 0.1;
+sandersCon.textVertPosition = 0.5;
+sandersCon.waveAnimateTime = 500;
+sandersCon.textSize=0.5;
+sandersCon.waveHeight= 0.1;
+
+var trumpCon = liquidFillGaugeDefaultSettings();
+trumpCon.circleColor = "#630000";
+trumpCon.textColor = "#FF4444";
+trumpCon.waveTextColor = "#FFAAAA";
+trumpCon.waveColor = "#8A0707";
+trumpCon.circleThickness = 0.15;
+trumpCon.textVertPosition = 0.5;
+trumpCon.waveAnimateTime = 5000;
+trumpCon.textSize=0.5;
+trumpCon.waveHeight=0.2;
+
+var clintonCon = liquidFillGaugeDefaultSettings();
+clintonCon.circleColor = "#3e18a5";
+clintonCon.textColor = "#a082f2";
+clintonCon.waveTextColor = "#645884";
+clintonCon.waveColor = "#835dea";
+clintonCon.circleThickness = 0.05;
+clintonCon.textVertPosition = 0.5;
+clintonCon.waveAnimateTime = 1000;
+clintonCon.textSize=0.5;
+
+var cruzCon = liquidFillGaugeDefaultSettings();
+cruzCon.circleColor = "#f28282";
+cruzCon.textColor = "#db4141";
+cruzCon.waveTextColor = "#a03b3b";
+cruzCon.waveColor = "#d8a0a0";
+cruzCon.circleThickness = 0.3;
+cruzCon.textVertPosition = 0.5;
+cruzCon.waveAnimateTime = 2000;
+cruzCon.textSize=0.5;
+cruzCon.waveHeight=0.5;
+
+var kasichCon = liquidFillGaugeDefaultSettings();
+kasichCon.circleColor = "#FF7777";
+kasichCon.textColor = "#FF4444";
+kasichCon.waveTextColor = "#FFAAAA";
+kasichCon.waveColor = "#FFDDDD";
+kasichCon.circleThickness = 0.2;
+kasichCon.textVertPosition = 0.5;
+kasichCon.waveAnimateTime = 800;
+kasichCon.textSize=0.5;
+
+
+var sandersGauge = loadLiquidFillGauge("sanders",0,sandersCon);
+var trumpGauge = loadLiquidFillGauge("trump",0,trumpCon);
+var clintonGauge = loadLiquidFillGauge("clinton",0,clintonCon);
+var cruzGauge = loadLiquidFillGauge("cruz",0,cruzCon);
+var kasichGauge = loadLiquidFillGauge("kasich",0,kasichCon);
+
 
 var update = function(hour) {
+    
     d3.select('#hour-value').text(hour + ":00:00" + '-' + (hour + 1) + ":00:00");
     d3.select('#hour').property('value', hour);
 
-    d3.select('#chart').html(''); // clean the thingy
-
-var svg = d3.select("#chart").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-
-d3.csv('data.csv', function(err, data) {
-    if (err) {
-        throw err;
-    }
-    x.domain(['Sanders', 'Trump', 'Clinton', 'Cruz', 'Kasich']);
-    y.domain([0, 22]);
-
-    svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
-
-    svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis)
-        .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", ".71em")
-        .style("text-anchor", "end")
-        .text("Tweets");
-
-    svg.append('rect')
-        .attr('class', 'sanders')
-        .attr('fill', 'blue')
-        .attr('x', x('Sanders'))
-        .attr('width', x.rangeBand)
-        .attr('y', y(to_int(data[hour].BernieSanders)))
-        .attr('height', height - y(to_int(data[hour].BernieSanders)));
-
-    svg.append('rect')
-        .attr('class', 'kaisch')
-        .attr('fill', 'red')
-        .attr('x', x('Kasich'))
-        .attr('width', x.rangeBand)
-        .attr('y', y(to_int(data[hour].JohnKasich)))
-        .attr('height', height - y(to_int(data[hour].JohnKasich)));
-
-    svg.append('rect')
-        .attr('class', 'clinton')
-        .attr('fill', 'darkblue')
-        .attr('x', x('Clinton'))
-        .attr('width', x.rangeBand)
-        .attr('y', y(to_int(data[hour].HillaryClinton)))
-        .attr('height', height - y(to_int(data[hour].HillaryClinton)));
-
-    svg.append('rect')
-        .attr('class', 'trump')
-        .attr('fill', 'orange')
-        .attr('x', x('Trump'))
-        .attr('width', x.rangeBand)
-        .attr('y', y(to_int(data[hour].realDonaldTrump)))
-        .attr('height', height - y(to_int(data[hour].realDonaldTrump)));
-
-    svg.append('rect')
-        .attr('class', 'cruz')
-        .attr('fill', 'darkred')
-        .attr('x', x('Cruz'))
-        .attr('width', x.rangeBand)
-        .attr('y', y(to_int(data[hour].tedcruz)))
-        .attr('height', height - y(to_int(data[hour].tedcruz)));
-
+    d3.csv('data.csv', function(err, data) {
+	if (err) {
+            throw err;
+	}
+	sandersGauge.update(to_int(data[hour].BernieSanders));
+	trumpGauge.update(to_int(data[hour].realDonaldTrump));
+	clintonGauge.update(to_int(data[hour].HillaryClinton));
+	cruzGauge.update(to_int(data[hour].tedcruz));
+	kasichGauge.update(to_int(data[hour].JohnKasich));
     });
 }
 
-d3.select("#hour").on("input", function() {
-  update(+this.value);
-});
 
+
+d3.select("#hour").on("input", function() {
+    update(+this.value);
+});
 update(20);
+
